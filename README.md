@@ -9,6 +9,6 @@ Students are expected to:
 Student Info
 =========================
 
-* Student Name: LE Thanh Hung 
-* Student ID: Bi10-074
+* Student Name: Le Thanh Hung 
+* Student ID: BI10-074
 
