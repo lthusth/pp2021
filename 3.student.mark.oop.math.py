@@ -46,9 +46,7 @@ class Student:
         screen.refresh()
 
     def __str__(self):
-        return f""" Student name is: {self._sname}
-        with ID: {self._sid}  
-        dob is: {self._dob} """
+        return f" Student name is: {self._sname}, with ID: {self._sid} , dob is: {self._dob}"
 
     def show_student(self):
         screen.addstr(self.__str__())
@@ -86,8 +84,8 @@ class Course:
         self._credits = screen.getstr()
 
     def __str__(self):
-        return f""" Course name is: {self._cname}
-        with course ID: {self._cid}
+        return f""" Course name is: {self._cname},
+        with course ID: {self._cid},
         {self._credits} credits """
 
     def show_course(self):
@@ -154,7 +152,7 @@ def calculate_gpa(sname):
 
 
 while True:
-    screen.addstr(
+    screen.addwstr(
         "Choose options you want: \n"
         "1: Student_info \n"
         "2: Course info \n"
