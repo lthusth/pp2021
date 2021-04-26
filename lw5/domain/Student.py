@@ -31,6 +31,7 @@ class Student:
         self._sname = screen.getstr().decode()
         screen.addstr("Enter student DOB: ")
         self._dob = screen.getstr().decode()
+        self._gpa = 0
         screen.clear()
         screen.refresh()
 
