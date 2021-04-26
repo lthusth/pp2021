@@ -1,16 +1,16 @@
-# import numpy as np
-import curses
-#curses
-print("preparing to initialize screen...")
-screen = curses.initscr()
-print("Screen initialized.")
-screen.refresh()
-curses.napms(2000)
-curses.endwin()
-import math
 student_list = []
 course_list = []
 mark_list = []
+# import numpy as np
+import curses
+import math
+
+screen = curses.initscr()
+screen.addstr("preparing to initialize screen...\n"
+              "Screen initialized.")
+screen.refresh()
+curses.napms(2000)
+screen.clear()
 
 
 class Student:
@@ -36,18 +36,26 @@ class Student:
         self._gpa = gpa
 
     def input_sinfo(self):
-        self._sid = input("Enter student ID: ")
-        self._sname = input("Enter student name: ")
-        self._dob = input("Enter student DOB: ")
+        screen.addstr("Enter student ID: ")
+        self._sid = screen.getstr()
+        screen.addstr("Enter student name: ")
+        self._sname = screen.getstr()
+        screen.addstr("Enter student DOB: ")
+        self._dob = screen.getstr()
+        screen.clear()
+        screen.refresh()
 
     def __str__(self):
-        return f'Student name is: {self._sname}, with ID: {self._sid}, dob is: {self._dob}'
+        return f""" Student name is: {self._sname}
+        with ID: {self._sid}  
+        dob is: {self._dob} """
 
     def show_student(self):
-        print(self.__str__())
+        screen.addstr(self.__str__())
 
 
-nstu = int(input("Enter number of students: "))
+screen.addstr("Enter number of students: ")
+nstu = int(screen.getstr())
 for i in range(0, nstu):
     s = Student("", "", "", "")
     s.input_sinfo()
@@ -70,24 +78,28 @@ class Course:
         return int(self._credits)
 
     def input_cinfo(self):
-        self._cid = input("Enter course ID: ")
-        self._cname = input("Enter course name: ")
-        self._credits = input("Enter number of credits: ")
+        screen.addstr("Enter course ID: ")
+        self._cid = screen.getstr()
+        screen.addstr("Enter course name: ")
+        self._cname = screen.getstr()
+        screen.addstr("Enter number of credits: ")
+        self._credits = screen.getstr()
 
     def __str__(self):
-        return f'Course name is: {self._cname}, with course ID: {self._cid}, {self._credits} credits'
+        return f""" Course name is: {self._cname}
+        with course ID: {self._cid}
+        {self._credits} credits """
 
     def show_course(self):
-        print(self.__str__())
+        screen.addstr(self.__str__())
 
 
-ncourse = int(input("Enter number of courses: "))
+screen.addstr("Enter number of courses: ")
+ncourse = int(screen.getstr())
 for i in range(0, ncourse):
     c = Course("", "", "")
     c.input_cinfo()
     course_list.append(c)
-
-mark_list = []
 
 
 class Mark:
@@ -106,19 +118,21 @@ class Mark:
         return int(self._value)
 
     def inputmark(self):
-        self._value = input(f"Enter mark for student {self._student.getsname()}:")
+        screen.addstr(f"Enter mark for student {self._student.getsname()}:")
+        self._value = int(screen.getstr())
 
     def __str__(self):
-        return f'{self._student.getsname()} got {self._value} in course: {self._course.getcname()}'
+        return f""" {self._student.getsname()} 
+                got {self._value} 
+                in course: {self._course.getcname()}"""
 
     def show_mark(self):
-        print(self.__str__())
+        screen.addstr(self.__str__())
 
 
-print("____________Input mark for each course______________ ")
+screen.addstr("__________Input mark for each course____________ ")
 
 for j in range(len(course_list)):
-    print('{}: '.format(course_list[j]))
     for i in range(len(student_list)):
         mark = Mark(student_list[i], course_list[j], "")
         mark.inputmark()
@@ -138,30 +152,47 @@ def calculate_gpa(sname):
         if student.getsname() == sname:
             student.setgpa(math.floor(total / total_credits))
 
-class Display:
-        while True:
-            main = int(input("Choose options you want: \n"
-                             "1: Student_info \n"
-                             "2: Course info \n"
-                             "3: Show mark \n"
-                             "4: Calculate gpa \n"))
 
-            if main == 1:
-                for student in student_list:
-                    student.show_student()
-            elif main == 2:
-                for course in course_list:
-                    course.show_course()
-            elif main == 3:
-                for mark in mark_list:
-                    mark.show_mark()
-            elif main == 4:
-                for student in student_list:
-                    calculate_gpa(student.getsname())
-                    print(f"{student.getsname()} got  {student.getgpa()} in gpa")
-            else:
-                break
-            print("window ended.")
-    # print(*map(lambda m: m.getcname(), course_list), sep='\n')
+while True:
+    screen.addstr(
+        "Choose options you want: \n"
+        "1: Student_info \n"
+        "2: Course info \n"
+        "3: Show mark \n"
+        "4: Calculate gpa \n")
+
+    screen.refresh()
+    main = int(screen.getstr())
+
+    if main == 1:
+        screen.clear()
+        for student in student_list:
+            student.show_student()
+        screen.refresh()
+
+    elif main == 2:
+        screen.clear()
+        for course in course_list:
+            course.show_course()
+        screen.refresh()
+
+    elif main == 3:
+        screen.clear()
+        for mark in mark_list:
+            mark.show_mark()
+        screen.refresh()
+
+    elif main == 4:
+        screen.clear()
+        for student in student_list:
+            calculate_gpa(student.getsname())
+            screen.addstr(f'{student.getsname()} got  {student.getgpa()} in gpa')
+        screen.refresh()
+
+    else:
+        break
+    screen.addstr("window ended.")
+
+# print(*map(lambda m: m.getcname(), course_list), sep='\n')
 # course_list[0].getcname() == mark_list[0].getcourse().getcname()
 # mark_list[0].getstudent().getsname()
