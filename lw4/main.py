@@ -9,14 +9,14 @@ screen.clear()
 
 while True:
     screen.addstr(
-        "Choose options you want: \n"
-        "1: Student_info \n"
-        "2: Course info \n"
-        "3: Show mark \n"
-        "4: Calculate gpa \n")
+    "\nChoose options you want: \n"
+    "1: Student_info \n"
+    "2: Course info \n"
+    "3: Show mark \n"
+    "4: Calculate gpa \n")
 
     screen.refresh()
-    main = int(screen.getstr())
+    main = int(screen.getstr().decode())
 
     if main == 1:
         screen.clear()
@@ -40,7 +40,7 @@ while True:
         screen.clear()
         for student in student_list:
             calculate_gpa(student.getsname())
-            screen.addstr(f'{student.getsname()} got  {student.getgpa()} in gpa')
+            screen.addstr(f'{student.getsname()} got  {student.getgpa()} in gpa\n')
         screen.refresh()
 
     else:

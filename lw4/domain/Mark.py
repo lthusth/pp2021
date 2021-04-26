@@ -1,4 +1,5 @@
 import curses
+screen = curses.initscr()
 mark_list = []
 class Mark:
     def __init__(self, sname, cname, value):
@@ -17,7 +18,8 @@ class Mark:
 
     def inputmark(self):
         screen.addstr(f"Enter mark for student {self._student.getsname()}:")
-        self._value = int(screen.getstr())
+        self._value = int(screen.getstr().decode())
+        screen.clear()
 
     def __str__(self):
         return f""" {self._student.getsname()} 

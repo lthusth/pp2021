@@ -1,4 +1,5 @@
 import curses
+screen = curses.initscr()
 
 student_list = []
 class Student:
@@ -25,18 +26,16 @@ class Student:
 
     def input_sinfo(self):
         screen.addstr("Enter student ID: ")
-        self._sid = screen.getstr()
+        self._sid = screen.getstr().decode()
         screen.addstr("Enter student name: ")
-        self._sname = screen.getstr()
+        self._sname = screen.getstr().decode()
         screen.addstr("Enter student DOB: ")
-        self._dob = screen.getstr()
+        self._dob = screen.getstr().decode()
         screen.clear()
         screen.refresh()
 
     def __str__(self):
-        return f""" Student name is: {self._sname}
-        with ID: {self._sid}  
-        dob is: {self._dob} """
+        return f" Student name is: {self._sname}, with ID: {self._sid} , dob is: {self._dob}"
 
     def show_student(self):
         screen.addstr(self.__str__())
