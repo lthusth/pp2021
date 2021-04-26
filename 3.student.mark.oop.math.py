@@ -37,11 +37,11 @@ class Student:
 
     def input_sinfo(self):
         screen.addstr("Enter student ID: ")
-        self._sid = screen.getstr()
+        self._sid = screen.getstr().decode()
         screen.addstr("Enter student name: ")
-        self._sname = screen.getstr()
+        self._sname = screen.getstr().decode()
         screen.addstr("Enter student DOB: ")
-        self._dob = screen.getstr()
+        self._dob = screen.getstr().decode()
         screen.clear()
         screen.refresh()
 
@@ -53,7 +53,7 @@ class Student:
 
 
 screen.addstr("Enter number of students: ")
-nstu = int(screen.getstr())
+nstu = int(screen.getstr().decode())
 for i in range(0, nstu):
     s = Student("", "", "", "")
     s.input_sinfo()
@@ -77,11 +77,12 @@ class Course:
 
     def input_cinfo(self):
         screen.addstr("Enter course ID: ")
-        self._cid = screen.getstr()
+        self._cid = screen.getstr().decode()
         screen.addstr("Enter course name: ")
-        self._cname = screen.getstr()
+        self._cname = screen.getstr().decode()
         screen.addstr("Enter number of credits: ")
-        self._credits = screen.getstr()
+        self._credits = screen.getstr().decode()
+        screen.clear()
 
     def __str__(self):
         return f""" Course name is: {self._cname},
@@ -93,7 +94,7 @@ class Course:
 
 
 screen.addstr("Enter number of courses: ")
-ncourse = int(screen.getstr())
+ncourse = int(screen.getstr().decode())
 for i in range(0, ncourse):
     c = Course("", "", "")
     c.input_cinfo()
@@ -117,7 +118,8 @@ class Mark:
 
     def inputmark(self):
         screen.addstr(f"Enter mark for student {self._student.getsname()}:")
-        self._value = int(screen.getstr())
+        self._value = int(screen.getstr().decode())
+        screen.clear()
 
     def __str__(self):
         return f""" {self._student.getsname()} 
@@ -128,9 +130,10 @@ class Mark:
         screen.addstr(self.__str__())
 
 
-screen.addstr("__________Input mark for each course____________ ")
+screen.addstr("__________Input mark for each course____________ \n")
 
 for j in range(len(course_list)):
+    screen.addstr("for course {} \n".format(course_list[j].getcname()))
     for i in range(len(student_list)):
         mark = Mark(student_list[i], course_list[j], "")
         mark.inputmark()
@@ -152,15 +155,15 @@ def calculate_gpa(sname):
 
 
 while True:
-    screen.addwstr(
-        "Choose options you want: \n"
-        "1: Student_info \n"
-        "2: Course info \n"
-        "3: Show mark \n"
-        "4: Calculate gpa \n")
+    screen.addstr(
+    "\nChoose options you want: \n"
+    "1: Student_info \n"
+    "2: Course info \n"
+    "3: Show mark \n"
+    "4: Calculate gpa \n")
 
     screen.refresh()
-    main = int(screen.getstr())
+    main = int(screen.getstr().decode())
 
     if main == 1:
         screen.clear()
@@ -184,12 +187,13 @@ while True:
         screen.clear()
         for student in student_list:
             calculate_gpa(student.getsname())
-            screen.addstr(f'{student.getsname()} got  {student.getgpa()} in gpa')
+            screen.addstr(f'{student.getsname()} got  {student.getgpa()} in gpa\n')
         screen.refresh()
 
     else:
         break
     screen.addstr("window ended.")
+
 
 # print(*map(lambda m: m.getcname(), course_list), sep='\n')
 # course_list[0].getcname() == mark_list[0].getcourse().getcname()
