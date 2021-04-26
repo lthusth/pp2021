@@ -6,7 +6,7 @@ import curses
 import math
 
 screen = curses.initscr()
-screen.addstr("preparing to initialize screen...\n"
+screen.addstr("Initializing screen...\n"
               "Screen initialized.")
 screen.refresh()
 curses.napms(2000)
@@ -196,3 +196,5 @@ while True:
 # print(*map(lambda m: m.getcname(), course_list), sep='\n')
 # course_list[0].getcname() == mark_list[0].getcourse().getcname()
 # mark_list[0].getstudent().getsname()
+
+
