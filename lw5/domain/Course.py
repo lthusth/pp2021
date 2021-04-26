@@ -1,4 +1,4 @@
-import  curses
+import curses
 screen = curses.initscr()
 course_list = []
 class Course:
@@ -18,15 +18,16 @@ class Course:
 
     def input_cinfo(self):
         screen.addstr("Enter course ID: ")
-        self._cid = screen.getstr()
+        self._cid = screen.getstr().decode()
         screen.addstr("Enter course name: ")
-        self._cname = screen.getstr()
+        self._cname = screen.getstr().decode()
         screen.addstr("Enter number of credits: ")
-        self._credits = screen.getstr()
+        self._credits = screen.getstr().decode()
+        screen.clear()
 
     def __str__(self):
-        return f""" Course name is: {self._cname}
-        with course ID: {self._cid}
+        return f""" Course name is: {self._cname},
+        with course ID: {self._cid},
         {self._credits} credits """
 
     def show_course(self):
