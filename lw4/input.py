@@ -24,3 +24,6 @@ for j in range(len(course_list)):
         mark = Mark(student_list[i], course_list[j], "")
         mark.inputmark()
         mark_list += [mark]
+
+    screen.clear()
+    screen.refresh()
