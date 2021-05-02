@@ -14,17 +14,14 @@ class Mark:
         return self._course
 
     def getmark(self):
-        return int(self._value)
+        return float(self._value)
 
     def inputmark(self):
         screen.addstr(f"Enter mark for student {self._student.getsname()}:")
-        self._value = int(screen.getstr().decode())
-        screen.clear()
+        self._value = float(screen.getstr().decode())
 
     def __str__(self):
-        return f""" {self._student.getsname()} 
-                got {self._value} 
-                in course: {self._course.getcname()}"""
+        return f" {self._student.getsname()} got {self._value} in course {self._course.getcname()} \n"
 
     def show_mark(self):
         screen.addstr(self.__str__())

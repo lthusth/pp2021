@@ -1,6 +1,5 @@
 import curses
 screen = curses.initscr()
-
 student_list = []
 class Student:
     def __init__(self, sname, sid, dob, gpa):
@@ -36,7 +35,7 @@ class Student:
         screen.refresh()
 
     def __str__(self):
-        return f" Student name is: {self._sname}, with ID: {self._sid} , dob is: {self._dob}"
+        return f" Student name is: {self._sname}, with ID: {self._sid} , dob is: {self._dob} \n"
 
     def show_student(self):
         screen.addstr(self.__str__())

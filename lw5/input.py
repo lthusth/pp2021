@@ -42,3 +42,6 @@ for j in range(len(course_list)):
             f = open("marks.txt", "a")
         f.write(mark.getstudent().getsname() + "\n" + mark.getcourse().getcname() + "\n" + str(mark.getmark()) + "\n")
         f.close()
+
+    screen.clear()
+    screen.refresh()

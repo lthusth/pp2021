@@ -7,7 +7,7 @@ def calculate_gpa(sname):
         if mark.getstudent().getsname() == sname:
             for course in course_list:
                 if course.getcname() == mark.getcourse().getcname():
-                    total += int(mark.getmark()) * int(course.getcredits())
+                    total += float(mark.getmark()) * int(course.getcredits())
                     total_credits += int(course.getcredits())
     for student in student_list:
         if student.getsname() == sname:

@@ -26,9 +26,7 @@ class Course:
         screen.clear()
 
     def __str__(self):
-        return f""" Course name is: {self._cname},
-        with course ID: {self._cid},
-        {self._credits} credits """
+        return f" Course name is: {self._cname}, with course ID: {self._cid}, {self._credits} credits \n"
 
     def show_course(self):
         screen.addstr(self.__str__())
